@@ -47,8 +47,8 @@ function App() {
       //agrego al objeto que se mapea
     }
     else {
-      setErrorNombre(nombreCheck(nombre) ? "" : "Error en el nombre")
-      setErrorApellido(apellidoCheck(apellido) ? "" : "Error en el apellido")
+      setErrorNombre(nombreCheck(nombre) ? "" : "Por favor chequea que la información sea correcta")
+      setErrorApellido(apellidoCheck(apellido) ? "" : "Por favor chequea que la información sea correcta")
     }
   }
 
