@@ -1,15 +1,17 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
+import { Card } from './components/Card'
 
 
 function App() {
 
   const [nombre, setNombre] = useState("")
   const [apellido, setApellido] = useState("")
-  const [listaDePersonas, setListaDePersonas] = useState("")
+  const [listaDePersonas, setListaDePersonas] = useState([])
   const [errorNombre, setErrorNombre] = useState("")
   const [errorApellido, setErrorApellido] = useState("")
+
 
   const onChangeNombre = (e) =>{
     setNombre(e.target.value)
@@ -33,7 +35,11 @@ function App() {
     
 
     if (nombreCheck(nombre) && apellidoCheck(apellido)){
-      
+      let persona = {
+        nombre: nombre,
+        apellido: apellido
+      }
+      setListaDePersonas(listaDePersonas => [...listaDePersonas, persona]);
       setErrorNombre("")
       setErrorApellido("")
       setApellido("")
@@ -49,7 +55,7 @@ function App() {
   return (
     <div className ="App">
       <form onSubmit={onSubmitForm}>
-        <label for="nombre">Nombre (minimo 3 caracteres y no puede comenzar con un espacio vacio)</label>
+        <label htmlFor="nombre">Nombre (minimo 3 caracteres y no puede comenzar con un espacio vacio)</label>
         <input 
           type="text"
           id="nombre"
@@ -58,7 +64,7 @@ function App() {
           onChange={onChangeNombre}
         />
         <p className='errorInput'>{errorNombre}</p>
-        <label for="apellido">Apellido (minimo 6 caracteres)</label>
+        <label htmlFor="apellido">Apellido (minimo 6 caracteres)</label>
         <input 
           type="text"
           id="apellido"
@@ -68,7 +74,13 @@ function App() {
         />
         <p className='errorInput'>{errorApellido}</p>
         <button type="submit">Enviar</button>  
-      </form>        
+      </form>
+    <div className = "cardContainer">
+      {listaDePersonas.map((persona) =>{
+        return <Card nombre ={persona.nombre} apellido = {persona.apellido}/>
+      })}
+
+    </div>
     </div>
   )
 }
